@@ -1,5 +1,14 @@
 <?php
+    session_start();
     require_once './functions.php';
+    if (isset($_POST['length'])) {
+
+            $length = (int)$_POST['length'];
+            $_SESSION['password'] = generator($length);
+            header('Location: result.php');
+            exit;
+            
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,24 +19,10 @@
 </head>
 <body>
     <h3>Generatore Password!</h3>
-    <form action="" method="GET">
+    <form action="" method="POST">
         <label for="length">Inserisci la lunghezza della password</label>
-        <input type="number" id="length" name="length" >
+        <input type="number" id="length" name="length" min="4" max="30">
         <button type="submit">Genera</button>
     </form>
-    <?php
-        if (isset($_GET['length'])) {
-            $length = (int)$_GET['length'];
-            
-            if ($length <= 0) {
-                echo 'Inserisci un numero da 1 a 20';
-            } elseif ($length > 20 ) {
-                echo 'La password non può superare i 20 caratteri';
-            } else {
-                echo "Password: " . generator($length);
-            }
-            
-        }
-    ?>
 </body>
 </html>
