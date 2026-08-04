@@ -1,27 +1,5 @@
 <?php
-    function generator (int $length = 0) {
-        $password = '';
-
-        for ($i = 0; $i < $length; $i++) {
-            $typeOfChr = rand(1, 4);
-        
-
-            if ($typeOfChr === 1) {
-                $password .= chr(rand(65, 90)); //caratteri ASCII comprendenti A-Z
-            } elseif ($typeOfChr === 2) {
-                $password .= chr(rand(97, 122)); //caratteri ASCII comprendenti a-z
-            } elseif ($typeOfChr === 3) {
-                $password .= chr(rand(48, 57)); //caratteri ASCII comprendenti 1-9
-            } else {
-                $arrSpecialChr = ['!', '$', '&', '-', '_', '(', ')', '?'];
-                $randomIndex = array_rand($arrSpecialChr);
-                $password .= $arrSpecialChr[$randomIndex];
-            }
-
-       
-        }
-         return $password;
-    } 
+    require_once './functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,10 +19,12 @@
         if (isset($_GET['length'])) {
             $length = (int)$_GET['length'];
             
-            if ($length > 20 ) {
+            if ($length <= 0) {
+                echo 'Inserisci un numero da 1 a 20';
+            } elseif ($length > 20 ) {
                 echo 'La password non può superare i 20 caratteri';
             } else {
-                echo generator($length);
+                echo "Password: " . generator($length);
             }
             
         }
