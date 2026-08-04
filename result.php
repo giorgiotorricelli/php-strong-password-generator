@@ -3,7 +3,6 @@
     $password = $_SESSION['password'];
     unset($_SESSION['password']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
